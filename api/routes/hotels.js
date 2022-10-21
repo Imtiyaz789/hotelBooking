@@ -1,14 +1,15 @@
 import express from 'express'
 const router = express.Router()
 import hotelControllers from '../controller/hotels.js'
-
+import { verifyAdmin } from '../utils/verifyToken.js'
 
 //CREATE
-router.post('/', hotelControllers.createHotel)
+router.post('/', verifyAdmin, hotelControllers.createHotel)
 // UPDATE
-router.put('/:id', hotelControllers.updateHotel)
+router.put('/:id', verifyAdmin, hotelControllers.updateHotel)
 // DELETE
-router.delete('/:id', hotelControllers.deleteHotel)
+router.delete('/:id', verifyAdmin, hotelControllers.deleteHotel)
+
 // GET
 router.get('/:id', hotelControllers.viewHotel)
 // GET ALL
